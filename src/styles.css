@@ -1,0 +1,112 @@
+:root{
+  --brand:#1976d2;
+  --brand-dark:#0f4fa3;
+  --paper:#fbf8f2;
+  --ink:#0a2036;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: var(--paper);
+  color: var(--ink);
+}
+.wrapper{
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:2rem;
+  gap:2rem;
+}
+.card{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:3rem 3.5rem;
+  background:white;
+  border:2px solid color-mix(in oklab, var(--brand), white 70%);
+  border-radius:24px;
+  box-shadow:0 10px 30px color-mix(in oklab, var(--brand), transparent 80%);
+}
+.logo{
+  width:140px;
+  height:auto;
+  filter: drop-shadow(0 6px 16px color-mix(in oklab, var(--brand), transparent 80%));
+}
+.title{
+  margin:1rem 0 0;
+  font-size:2.25rem;
+  line-height:1.1;
+  color: var(--brand-dark);
+}
+.subtitle{
+  margin:0.25rem 0 0;
+  font-size:1.25rem;
+  letter-spacing:.02em;
+  color: var(--brand);
+  text-transform: lowercase;
+}
+.footer{
+  font-size:.9rem;
+  opacity:.7;
+}
+@media (prefers-color-scheme: dark){
+  body{background: #0b0e15; color:#e8eef7}
+  .card{background:#0f1420;border-color: color-mix(in oklab, var(--brand), black 70%);}
+  .title{color:#e8eef7}
+}
+
+
+/* === HybridForgeLab Dark Theme Overrides === */
+:root {
+  --color-bg: #0b0f14;
+  --color-surface: #111827;
+  --color-text: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-primary: #08b0ff;
+  --color-accent: #00e0ff;
+  --color-border: #1f2937;
+}
+html, body {
+  background: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+a, .link, .btn-primary {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+.btn-primary, button.primary {
+  background: var(--color-primary) !important;
+  color: #0b0f14 !important;
+}
+header, .navbar, .card, .section, footer {
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+.card, .panel, .hero {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 16px !important;
+}
+input, textarea, select {
+  background: #0e141b !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+}
+hr {
+  border-color: var(--color-border) !important;
+}
+/* Accent underlines and hover */
+a:hover {
+  text-decoration-color: var(--color-accent) !important;
+  filter: drop-shadow(0 0 4px rgba(0,224,255,0.4));
+}
+/* Utility classes */
+.text-muted { color: var(--color-text-muted) !important; }
+.bg-surface { background: var(--color-surface) !important; }
+.border-muted { border-color: var(--color-border) !important; }

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hybridforgelab.com/sitemap.xml
