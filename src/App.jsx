@@ -9,7 +9,7 @@ export default function App() {
         <p className="subtitle">em desenvolvimento</p>
       </div>
       <footer className="footer">
-        © {new Date().getFullYear()} Hybrid forge lab
+
       </footer>
     </main>
   );
