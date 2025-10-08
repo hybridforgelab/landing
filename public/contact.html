@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact – Hybrid Forge Lab</title>
+    <meta name="theme-color" content="#08b0ff" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+
+    <style>
+    body {
+      background-color: #0b0f14;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* === HEADER / NAVBAR === */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 20, 0.95);
+      border-bottom: 1px solid #111;
+      backdrop-filter: blur(8px);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 15px 25px;
+    }
+
+    /* Logo with image + text */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #08b0ff;
+      text-decoration: none;
+      letter-spacing: .5px;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      border-radius: 4px;
+      transition: transform .3s ease;
+    }
+
+    .logo:hover .logo-img {
+      transform: scale(1.05);
+    }
+
+    .logo-text {
+      white-space: nowrap;
+    }
+
+    /* Nav links as buttons */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      color: #08b0ff;
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid #08b0ff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background .3s, color .3s, border-color .3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #08b0ff;
+      color: #fff;
+      border-color: #08b0ff;
+    }
+
+    @media (max-width: 600px) {
+      .logo-text { display: none; }
+      .logo-img { height: 36px; }
+      .nav-links a { padding: 6px 12px; font-size: 0.9em; }
+    }
+
+    /* === PAGE CONTENT === */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #08b0ff;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 480px;
+      background: #11161d;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label { font-weight: 500; margin-bottom: 5px; }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #222;
+      border-radius: 6px;
+      background: #0e141b;
+      color: #fff;
+      font-size: 1em;
+      resize: vertical;
+      transition: border-color .3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #08b0ff;
+    }
+
+    button {
+      background: #08b0ff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 1em;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .3s;
+    }
+
+    button:hover {
+      background: #0ac0ff;
+    }
+
+    .back-home {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .back-home a {
+      color: #08b0ff;
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid #08b0ff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      display: inline-block;
+    }
+
+    .back-home a:hover {
+      background: #08b0ff;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    #form-status {
+      margin-top: 15px;
+      text-align: center;
+      color: #08b0ff;
+      font-size: 0.95em;
+    }
+
+    footer {
+      margin-top: 50px;
+      color: #777;
+      text-align: center;
+      font-size: 0.9em;
+      padding-bottom: 30px;
+    }
+
+    /* === TOAST === */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #08b0ff;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 9999;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .toast.error { background: #ff4e4e; }
+  </style>
+</head>
+
+<body>
+<!-- 🔹 HEADER -->
+<header>
+    <nav>
+        <a href="/" class="logo">
+            <img src="/logo.png" alt="Hybrid Forge Lab Logo" class="logo-img" />
+            <span class="logo-text">Hybrid&nbsp;Forge&nbsp;Lab</span>
+        </a>
+        <div class="nav-links" id="nav-links"></div>
+    </nav>
+</header>
+
+<main>
+    <h1>Contact</h1>
+
+    <form id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="_replyto" placeholder="email@example.com" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <div class="back-home">
+        <a href="/">← Back to Home</a>
+    </div>
+
+    <p id="form-status"></p>
+</main>
+
+<footer>
+    <p>© 2025 Hybrid Forge Lab — All rights reserved</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<!-- 🔹 Build menu from config.json -->
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('nav-links');
+      if (!container) return;
+
+      const repo = window.location.pathname.split('/')[1] || '';
+      const basePath = repo ? `/${repo}` : '';
+
+      const candidates = [
+        'config.json',
+        `${basePath}/config.json`,
+        '/config.json',
+        `${basePath}/public/config.json`
+      ];
+
+      async function fetchFirst(urls) {
+        for (const u of urls) {
+          try {
+            const r = await fetch(u, { cache: 'no-store' });
+            if (r.ok) return r.json();
+          } catch {}
+        }
+        return null;
+      }
+
+      const cfg = await fetchFirst(candidates);
+      const currentPath = location.pathname.replace(/\/+$/, '') || '/';
+      const overrides = JSON.parse(localStorage.getItem('navOverrides') || '{}');
+
+      const items = (cfg?.nav || [])
+        .map(i => ({ ...i, enabled: overrides[i.label] !== undefined ? !!overrides[i.label] : !!i.enabled }))
+        .filter(i => i.enabled)
+        .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
+      container.innerHTML = '';
+
+      if (!items.length) {
+        const span = document.createElement('span');
+        span.textContent = '—';
+        span.style.opacity = '0.5';
+        container.appendChild(span);
+        return;
+      }
+
+      items.forEach(item => {
+        const a = document.createElement('a');
+        const href = item.href || '#';
+        a.href = href;
+        a.textContent = item.label;
+        if (item.external) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+
+        const itemPath = href.startsWith('http')
+          ? new URL(href, location.origin).pathname
+          : href;
+
+        if ((itemPath.replace(/\/+$/, '') || '/') === currentPath)
+          a.classList.add('active');
+
+        container.appendChild(a);
+      });
+    });
+
+    //  Contact form handling
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const toast = document.getElementById('toast');
+
+    function showToast(message, isError = false) {
+      toast.textContent = message;
+      toast.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => { toast.className = 'toast'; }, 4000);
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.textContent = 'Sending...';
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch('https://formspree.io/f/xzbqpyzl', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          showToast('✅ Thank you! Your message has been sent successfully.');
+          status.textContent = '';
+          form.reset();
+        } else {
+          showToast('❌ An error occurred. Please try again later.', true);
+          status.textContent = '';
+        }
+      } catch (err) {
+        showToast('❌ Network error. Please check your connection.', true);
+        status.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>

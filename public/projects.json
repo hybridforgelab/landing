@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Neural Forge",
+    "description": "AI-assisted creative tool for code + design generation.",
+    "type": "open-source",
+    "enabled": false,
+    "order": 4,
+    "badges": ["AI", "Open Source", "Code & Design"],
+    "cta": [
+      { "label": "GitHub", "url": "https://github.com/hybridforgelab/neural-forge", "variant": "primary" }
+    ]
+  },
+  {
+    "name": "ArcPulse",
+    "description": "Real-time data visualization for smart cities.",
+    "type": "paid",
+    "enabled": false,
+    "order": 2,
+    "badges": ["Data Viz", "Realtime", "Cities"],
+    "cta": [
+      { "label": "Store", "url": "https://store.hybridforgelab.com/arcpulse", "variant": "primary" }
+    ]
+  },
+  {
+    "name": "SkySynth",
+    "description": "Procedural sound engine for immersive experiences.",
+    "type": "free-run",
+    "enabled": false,
+    "order": 3,
+    "badges": ["Audio", "Procedural", "Immersive"],
+    "cta": [
+      { "label": "Coming Soon", "url": "#", "variant": "ghost" }
+    ]
+  },
+  {
+    "name": "EmailValidator",
+    "description": "Ultra-fast email validation API with pay-as-you-go, annual, and self-hosted plans.",
+    "type": "paid",
+    "enabled": true,
+    "order": 1,
+    "badges": ["API", "PWA", "Email"],
+    "cta": [
+      { "label": "Coming Soon", "url": "#", "variant": "ghost" }
+    ]
+  },
+  {
+    "name": "EmailValidator PRO",
+    "description": "Ultra-fast email validation API with pay-as-you-go, annual, and self-hosted plans.",
+    "type": "Paid",
+    "enabled": false,
+    "order": 2,
+    "badges": ["API", "PWA", "Email"],
+    "cta": [
+      { "label": "Try Free", "url": "https://emailvalidator.hybridforgelab.com", "variant": "primary" },
+      { "label": "Pricing & Plans", "url": "https://emailvalidator.hybridforgelab.com/pricing.html", "variant": "primary" }
+    ]
+  }
+]

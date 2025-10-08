@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects – Hybrid Forge Lab</title>
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+    <meta name="theme-color" content="#08b0ff" />
+
+    <style>
+    body {
+      background-color: #0b0f14;
+      color: #fff;
+      font-family: system-ui, -apple-system, 'Inter', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* === HEADER / NAVBAR (same as index/contact) === */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 20, 0.95);
+      border-bottom: 1px solid #111;
+      backdrop-filter: blur(8px);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 15px 25px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #08b0ff;
+      text-decoration: none;
+      letter-spacing: .5px;
+    }
+    .logo-img { height: 40px; width: auto; border-radius: 4px; transition: transform .3s ease; }
+    .logo:hover .logo-img { transform: scale(1.05); }
+    .logo-text { white-space: nowrap; }
+
+    .nav-links { display: flex; align-items: center; gap: 12px; }
+    .nav-links a {
+      display: inline-block;
+      color: #08b0ff;
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid #08b0ff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background .3s, color .3s, border-color .3s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { background: #08b0ff; color: #fff; border-color: #08b0ff; }
+
+    @media (max-width: 600px) {
+      .logo-text { display: none; }
+      .logo-img { height: 36px; }
+      .nav-links a { padding: 6px 12px; font-size: .9em; }
+    }
+
+    /* === PAGE CONTENT === */
+    main {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Title */
+    h1 {
+      color:#08b0ff;
+      text-align:center;
+      margin-bottom:30px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    h1.visible { opacity: 1; transform: translateY(0); }
+
+    /* Table container */
+    #projects-table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background:#11161d;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    #projects-table.visible { opacity: 1; transform: translateY(0); }
+
+    th, td { padding:14px 16px; text-align:left; vertical-align: top; }
+    th {
+      background:#0e141b;
+      color:#08b0ff;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    /* Row reveal on scroll */
+    tbody tr {
+      background:#0f141b;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    tbody tr:nth-child(even) { background:#10171f; }
+    tbody tr:hover { background:#16202b; }
+    tbody tr.show { opacity: 1; transform: translateY(0); }
+
+    a { color:#08b0ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    .back-home {
+      margin-top:30px;
+      text-align:center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .back-home.visible { opacity: 1; transform: translateY(0); }
+
+    footer { margin-top:50px; color:#777; text-align:center; font-size:.9em; }
+    .muted { color:#9aa4b2; font-size:.95em; margin:10px 0 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      h1, #projects-table, .back-home, tbody tr { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* ▼ NEW: CTA buttons */
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid transparent;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .btn.primary { background:#08b0ff; color:#001018; border-color:#08b0ff; }
+    .btn.ghost   { background:transparent; color:#08b0ff; border-color:#08b0ff; }
+    .btn:hover   { filter: brightness(1.05); }
+    </style>
+</head>
+
+<body>
+<!-- 🔹 HEADER (shared) -->
+<header>
+    <nav>
+        <a href="/" class="logo">
+            <img src="/logo.png" alt="Hybrid Forge Lab Logo" class="logo-img" />
+            <span class="logo-text">Hybrid&nbsp;Forge&nbsp;Lab</span>
+        </a>
+        <div class="nav-links" id="nav-links"></div>
+    </nav>
+</header>
+
+<main>
+    <h1 id="page-title">Projects</h1>
+
+    <table id="projects-table" role="table" aria-label="Projects list">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Actions</th> <!-- renamed -->
+        </tr>
+        </thead>
+        <tbody id="projects-body">
+        <!-- Rows will be injected here -->
+        </tbody>
+    </table>
+
+    <p id="projects-empty" class="muted" style="display:none;">No projects are enabled yet.</p>
+
+    <div class="back-home" id="back-home">
+        <a href="/">← Back to Home</a>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Hybrid Forge Lab — All rights reserved</p>
+</footer>
+
+<script>
+    // 🔹 Build menu from config.json (same logic as index/contact)
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('nav-links');
+      if (!container) return;
+
+      const repo = window.location.pathname.split('/')[1] || '';
+      const basePath = repo ? `/${repo}` : '';
+
+      const candidates = [
+        'config.json',
+        `${basePath}/config.json`,
+        '/config.json',
+        `${basePath}/public/config.json`
+      ];
+
+      async function fetchFirst(urls) {
+        for (const u of urls) {
+          try {
+            const r = await fetch(u, { cache: 'no-store' });
+            if (r.ok) return r.json();
+          } catch {}
+        }
+        return null;
+      }
+
+      const cfg = await fetchFirst(candidates);
+      const currentPath = location.pathname.replace(/\/+$/, '') || '/';
+      const overrides = JSON.parse(localStorage.getItem('navOverrides') || '{}');
+
+      const items = (cfg?.nav || [])
+        .map(i => ({ ...i, enabled: overrides[i.label] !== undefined ? !!overrides[i.label] : !!i.enabled }))
+        .filter(i => i.enabled)
+        .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
+      container.innerHTML = '';
+      if (!items.length) {
+        const span = document.createElement('span');
+        span.textContent = '—';
+        span.style.opacity = '0.5';
+        container.appendChild(span);
+        return;
+      }
+
+      items.forEach(item => {
+        const a = document.createElement('a');
+        const href = item.href || '#';
+        a.href = href;
+        a.textContent = item.label;
+
+        if (item.external) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+
+        const itemPath = href.startsWith('http')
+          ? new URL(href, location.origin).pathname
+          : href;
+
+        if ((itemPath.replace(/\/+$/, '') || '/') === currentPath)
+          a.classList.add('active');
+
+        container.appendChild(a);
+      });
+    });
+
+    // 🔹 Projects page animations + data loading
+    const repoName = window.location.pathname.split('/')[1] || '';
+    const basePath = repoName ? `/${repoName}` : '';
+    const jsonCandidates = [
+      `${basePath}/projects.json`,
+      'projects.json',
+      `${basePath}/public/projects.json`
+    ];
+
+    const table = document.getElementById('projects-table');
+    const tbody = document.getElementById('projects-body');
+    const emptyMsg = document.getElementById('projects-empty');
+
+    // IntersectionObservers
+    const ioOpts = { threshold: 0.15 };
+    const onVisible = (el, cls = 'visible') => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(cls);
+            io.unobserve(entry.target);
+          }
+        });
+      }, ioOpts);
+      io.observe(el);
+    };
+
+    // Title + table + back-home fade when in view
+    onVisible(document.getElementById('page-title'));
+    onVisible(table);
+    onVisible(document.getElementById('back-home'));
+
+    function typeLabel(type) {
+      const map = {
+        'open-source': 'Open Source',
+        'free-run': 'Free Run',
+        'free-test': 'Free Test',
+        'paid': 'Paid'
+      };
+      return map[type] || type || '-';
+    }
+
+
+    async function loadProjects() {
+      let data = null;
+      for (const url of jsonCandidates) {
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) continue;
+          data = await res.json();
+          break;
+        } catch (e) { /* try next */ }
+      }
+
+      if (!Array.isArray(data)) {
+        emptyMsg.textContent = 'Could not load projects.json.';
+        emptyMsg.style.display = 'block';
+        return;
+      }
+
+      const items = data
+        .map(p => ({ enabled: true, ...p }))
+        .filter(p => p.enabled)
+        .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
+      if (!items.length) {
+        emptyMsg.style.display = 'block';
+        return;
+      }
+
+      tbody.innerHTML = '';
+
+      // Build rows
+      items.forEach((p) => {
+        const tr = document.createElement('tr');
+
+        const tdName = document.createElement('td');
+        tdName.textContent = p.name || '-';
+
+        // (optional) badges under name
+        if (Array.isArray(p.badges) && p.badges.length) {
+          const wrap = document.createElement('div');
+          wrap.style.marginTop = '6px';
+          p.badges.forEach(b => {
+            const tag = document.createElement('span');
+            tag.textContent = b;
+            tag.style.cssText = 'display:inline-block;font-size:.75em;opacity:.8;border:1px dashed rgba(255,255,255,.25);padding:.1rem .35rem;border-radius:6px;margin-right:6px;';
+            wrap.appendChild(tag);
+          });
+          tdName.appendChild(wrap);
+        }
+
+        const tdDesc = document.createElement('td');
+        tdDesc.textContent = p.description || '';
+
+        const tdType = document.createElement('td');
+        tdType.textContent = typeLabel(p.type);
+
+        const tdActions = document.createElement('td');
+
+        // Preferred: CTA array
+        if (Array.isArray(p.cta) && p.cta.length) {
+          p.cta.forEach(c => {
+            if (!c || !c.url) return;
+            const a = document.createElement('a');
+            a.href = c.url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.textContent = c.label || 'Open';
+            a.className = 'btn ' + (c.variant || 'primary');
+            tdActions.appendChild(a);
+          });
+        } else {
+          // Fallback to links.demo / links.buy
+          const demo = p.links?.demo;
+          const buy  = p.links?.buy;
+
+          if (demo) {
+            const a = document.createElement('a');
+            a.href = demo; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            a.textContent = 'Live Demo';
+            a.className = 'btn primary';
+            tdActions.appendChild(a);
+          }
+          if (buy) {
+            const b = document.createElement('a');
+            b.href = buy; b.target = '_blank'; b.rel = 'noopener noreferrer';
+            b.textContent = 'Pricing & Plans';
+            b.className = 'btn ghost';
+            tdActions.appendChild(b);
+          }
+
+          if (!tdActions.childNodes.length) tdActions.textContent = '—';
+        }
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdDesc);
+        tr.appendChild(tdType);
+        tr.appendChild(tdActions);
+        tbody.appendChild(tr);
+      });
+
+      // Reveal rows on scroll with IntersectionObserver
+      const rowObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            rowObserver.unobserve(entry.target);
+          }
+        });
+      }, ioOpts);
+
+      tbody.querySelectorAll('tr').forEach((row, i) => {
+        row.style.transitionDelay = `${i * 60}ms`;
+        rowObserver.observe(row);
+      });
+    }
+
+    loadProjects();
+  </script>
+</body>
+</html>

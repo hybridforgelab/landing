@@ -5,8 +5,8 @@ export default function App() {
     <main className="wrapper">
       <div className="card">
         <img src={logo} alt="Hybridforgelab logo" className="logo" />
-        <h1 className="title">Hybrid forge lab</h1>
-        <p className="subtitle">em desenvolvimento</p>
+        <h1 className="title">Hybrid Forge Lab</h1>
+        <p className="subtitle">Hybrid Forge Lab builds reliable, intelligent automation systems that empower industries through seamless technology, scalable APIs, and resilient infrastructure.</p>
       </div>
       <footer className="footer">
 

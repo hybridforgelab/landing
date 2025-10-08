@@ -1,0 +1,7 @@
+{
+  "nav": [
+    { "label": "Projects", "href": "/projects.html", "enabled": true,  "order": 2 },
+    { "label": "About",    "href": "/about.html",    "enabled": true, "order": 1 },
+    { "label": "Contact",  "href": "/contact.html",  "enabled": true, "order": 3 }
+  ]
+}
