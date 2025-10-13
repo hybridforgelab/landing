@@ -37,7 +37,7 @@
     "description": "Ultra-fast email validation API with pay-as-you-go, annual, and self-hosted plans.",
     "type": "paid",
     "enabled": true,
-    "order": 1,
+    "order": 2,
     "badges": ["API", "PWA", "Email"],
     "cta": [
       { "label": "Coming Soon", "url": "#", "variant": "ghost" }
@@ -53,6 +53,18 @@
     "cta": [
       { "label": "Try Free", "url": "https://emailvalidator.hybridforgelab.com", "variant": "primary" },
       { "label": "Pricing & Plans", "url": "https://emailvalidator.hybridforgelab.com/pricing.html", "variant": "primary" }
+    ]
+  },
+  {
+    "name": "ShivaMer",
+    "description": "ShivaMer is a web app that converts Python code into Mermaid diagrams in real time",
+    "type": "open-source",
+    "enabled": true,
+    "order": 1,
+    "badges": ["FastAPI", "Mermaid"],
+    "cta": [
+      { "label": "GitHub", "url": "https://github.com/hybridforgelab/shivamer", "variant": "primary" },
+      { "label": "Demo", "url": "https://shivamer.hybridforgelab.com/", "variant": "primary" }
     ]
   }
 ]
