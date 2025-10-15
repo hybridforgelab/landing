@@ -63,8 +63,7 @@
     "order": 1,
     "badges": ["FastAPI", "Mermaid"],
     "cta": [
-      { "label": "GitHub", "url": "https://github.com/hybridforgelab/shivamer", "variant": "primary" },
-      { "label": "Demo", "url": "https://shivamer.hybridforgelab.com/", "variant": "primary" }
+      { "label": "GitHub", "url": "https://github.com/hybridforgelab/shivamer", "variant": "primary" }
     ]
   }
 ]
